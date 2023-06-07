@@ -1,95 +1,34 @@
-import Image from 'next/image'
-import styles from './page.module.css'
+'use client';
+
+import React from 'react';
+import Link from 'next/link';
+import { Button } from '@mui/material';
+import { AiOutlineDoubleRight } from 'react-icons/ai';
+import { AppBar, Typo } from '~/views';
+import { pagesPath } from '~/lib';
 
 export default function Home() {
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.tsx</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
-
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore the Next.js 13 playground.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
-  )
+    <AppBar title="ようこそ、ureo.jpへ">
+      <Link href={pagesPath.apps.$url()}>
+        <Button endIcon={<AiOutlineDoubleRight />} fullWidth sx={{ fontSize: '1.2rem' }}>Apps</Button>
+      </Link>
+      <Link href={pagesPath.skills.$url()}>
+        <Button endIcon={<AiOutlineDoubleRight />} fullWidth sx={{ fontSize: '1.2rem' }}>Skills</Button>
+      </Link>
+      <Typo variant="h4" align="center" mt="2rem">リンク集</Typo>
+      <Link href="https://github.com/u0reo">
+        <Button endIcon={<AiOutlineDoubleRight />} fullWidth sx={{ fontSize: '1.2rem' }}>GitHub</Button>
+      </Link>
+      <Link href="https://zenn.dev/ureo">
+        <Button endIcon={<AiOutlineDoubleRight />} fullWidth sx={{ fontSize: '1.2rem' }}>Zenn</Button>
+      </Link>
+      <Link href="https://twitter.com/u0reo">
+        <Button endIcon={<AiOutlineDoubleRight />} fullWidth sx={{ fontSize: '1.2rem' }}>Twitter</Button>
+      </Link>
+      <Link href="https://github.com/u0reo/home">
+        <Button endIcon={<AiOutlineDoubleRight />} fullWidth sx={{ fontSize: '1.2rem' }}>Homepage&apos;s Source Code</Button>
+      </Link>
+    </AppBar>
+  );
 }
