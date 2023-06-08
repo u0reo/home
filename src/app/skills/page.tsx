@@ -22,6 +22,7 @@ import {
   SiMui,
   SiMysql,
   SiPostgresql,
+  SiRaspberrypi,
 } from 'react-icons/si';
 import { AppBar, Typo } from '~/views';
 
@@ -39,6 +40,7 @@ const rows: OtherSkill[] = [
   { name: 'AWS', icon: <SiAwsfargate />, years: 1, recently: true },
   { name: 'Azure', icon: <SiAzureartifacts />, years: 1 },
   { name: 'Firebase', icon: <SiFirebase />, years: 2, recently: true },
+  { name: 'Raspberry Pi', icon: <SiRaspberrypi />, years: 8, memo: 'Pi2は4年半、4は3年半、ZeroWHは1年', recently: true },
   { name: 'Apache', icon: <SiApache />, years: 3 },
   { name: 'Git', icon: <SiGit />, years: 3, recently: true },
   { name: 'GitHub Actions', icon: <SiGithubactions />, years: 1, recently: true },
