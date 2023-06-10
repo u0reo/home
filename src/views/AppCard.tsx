@@ -14,9 +14,10 @@ import {
   Typography,
 } from '@mui/material';
 import { FaJava } from 'react-icons/fa';
-import { MdDateRange, MdDone, MdPerson } from 'react-icons/md';
+import { MdCellTower, MdDateRange, MdDone, MdPerson } from 'react-icons/md';
 import {
   SiAndroid,
+  SiArduino,
   SiBootstrap,
   SiCplusplus,
   SiCsharp,
@@ -61,6 +62,8 @@ const DevStacks = {
   'PHP(Original)': <SiPhp />,
   Windows: <SiWindows11 />,
   Android: <SiAndroid />,
+  Arduino: <SiArduino />,
+  'LPWA(LTE-M)': <MdCellTower />,
 } as const;
 
 export type DevStackName = keyof typeof DevStacks;
@@ -69,6 +72,7 @@ export interface AppCardProps {
   path: string;
   title: string;
   imageUrl?: string;
+  imageType?: 'png' | 'jpg';
   devStacks: DevStackName[];
   dateRange: string;
   devType: '個人開発' | 'チーム開発';
@@ -82,7 +86,7 @@ export const AppCard: React.FC<AppCardProps> = (props) => {
     <Grid item xs={12} lg={6}>
       <Card sx={{ display: 'flex' }}>
         <CardImage
-          src={props.imageUrl || `/img/${props.path}.png`}
+          src={props.imageUrl || `/img/${props.path}.${props.imageType ?? 'png'}`}
           alt={props.title}
           width={150}
           height={150}

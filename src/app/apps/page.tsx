@@ -42,6 +42,14 @@ export default function Page() {
         dateRange="2019/7~2020/4"
         devType="個人開発"
         description="大学のシラバス閲覧や履修登録が行えるシステム" />
+      <AppCard
+        path="monicle"
+        title="monicle"
+        imageType="jpg"
+        devStacks={['C++', 'Arduino', 'LPWA(LTE-M)']}
+        dateRange="2022/1~2"
+        devType="個人開発"
+        description="LTE-Mを利用した自転車盗難防止システム" />
     </Grid>
   </AppBar>);
 }
