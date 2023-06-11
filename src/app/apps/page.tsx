@@ -50,6 +50,14 @@ export default function Page() {
         dateRange="2022/1~2"
         devType="個人開発"
         description="LTE-Mを利用した自転車盗難防止システム" />
+      <AppCard
+        path="certbot-dns01"
+        title="certbot-dns01"
+        devStacks={['Shell', 'Docker']}
+        dateRange="2023/1~4"
+        devType="個人開発"
+        description="NASでワイルドカード証明書を自動取得"
+        detailLink="https://zenn.dev/ureo/articles/certbot-dns01" />
     </Grid>
   </AppBar>);
 }

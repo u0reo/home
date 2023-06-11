@@ -21,11 +21,13 @@ import {
   SiBootstrap,
   SiCplusplus,
   SiCsharp,
+  SiDocker,
   SiElectron,
   SiFirebase,
   SiJavascript,
   SiJquery,
   SiPhp,
+  SiShell,
   SiVisualstudio,
   SiWindows11,
   SiXamarin,
@@ -64,6 +66,8 @@ const DevStacks = {
   Android: <SiAndroid />,
   Arduino: <SiArduino />,
   'LPWA(LTE-M)': <MdCellTower />,
+  Shell: <SiShell />,
+  Docker: <SiDocker />,
 } as const;
 
 export type DevStackName = keyof typeof DevStacks;
@@ -77,6 +81,7 @@ export interface AppCardProps {
   dateRange: string;
   devType: '個人開発' | 'チーム開発';
   description: string;
+  detailLink?: string;
   downloadLink?: string;
   sourceCodeLink?: string;
 }
@@ -108,7 +113,7 @@ export const AppCard: React.FC<AppCardProps> = (props) => {
             </Typography>
           </CardContent>
           <CardActions>
-            <Link href={`/app/${props.path}`}><Button size="small">詳細</Button></Link>
+            <Link href={props.detailLink || `/app/${props.path}`}><Button size="small">詳細</Button></Link>
             {
               !props.downloadLink ? null :
                 <Link href={props.downloadLink}><Button size="small">ダウンロード</Button></Link>
