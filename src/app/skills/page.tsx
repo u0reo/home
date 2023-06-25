@@ -35,7 +35,7 @@ interface OtherSkill {
   recently?: boolean;
 }
 
-const rows: OtherSkill[] = [
+export const otherSkills: OtherSkill[] = [
   { name: 'MySQL (MariaDB)', icon: <SiMysql />, years: 6, memo: 'ORM未使用' },
   { name: 'PostgreSQL', icon: <SiPostgresql />, years: 2, recently: true },
   { name: 'AWS', icon: <SiAwsfargate />, years: 1.5, recently: true },
@@ -66,7 +66,7 @@ export default function Page() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
+          {otherSkills.map((row) => (
             <TableRow
               key={row.name}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}

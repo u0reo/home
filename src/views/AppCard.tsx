@@ -1,13 +1,11 @@
 import React from 'react';
 import Image from 'next/image';
-import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import {
   Box,
-  Button,
   Card,
-  CardActions,
+  CardActionArea,
   CardContent,
-  Chip,
   Grid,
   Stack,
   styled,
@@ -32,21 +30,14 @@ import {
   SiWindows11,
   SiXamarin,
 } from 'react-icons/si';
+import { IconChip } from './IconChip';
 
 const CardImage = styled(Image)({
   objectFit: 'cover', // 'contain',
   objectPosition: '0 0',
   position: 'relative',
-  height: 'auto !important',
-  width: 'auto !important',
-});
-
-const IconChip = styled(Chip)({
-  margin: '0 !important',
-  'svg.MuiChip-icon': {
-    marginLeft: '6px',
-    height: '0.9em',
-  },
+  height: '192px !important',
+  width: '192px !important',
 });
 
 const DevStacks = {
@@ -81,49 +72,42 @@ export interface AppCardProps {
   dateRange: string;
   devType: '個人開発' | 'チーム開発';
   description: string;
-  detailLink?: string;
-  downloadLink?: string;
-  sourceCodeLink?: string;
+  link?: string;
 }
 
 export const AppCard: React.FC<AppCardProps> = (props) => {
+  const { path, title, imageUrl, imageType, devStacks, dateRange, devType, description, link } = props;
+  const router = useRouter();
+
   return (
     <Grid item xs={12} lg={6}>
-      <Card sx={{ display: 'flex' }}>
-        <CardImage
-          src={props.imageUrl || `/img/${props.path}.${props.imageType ?? 'png'}`}
-          alt={props.title}
-          width={150}
-          height={150}
-        />
-        <Box>
+      <Card>
+        <CardActionArea sx={{ display: 'flex', alignItems: 'flex-start' }} onClick={() => {
+          const realLink = link || `/app/${path}`;
+          realLink.includes('http') ? window.open(realLink) : router.push(realLink);
+        }}>
+          <CardImage
+            src={imageUrl || `/img/${path}.${imageType ?? 'png'}`}
+            alt={title}
+            width={150}
+            height={150}
+          />
           <CardContent>
-            <Typography variant="h5" component="div">{props.title}</Typography>
+            <Typography variant="h5" component="div">{title}</Typography>
             <Stack direction="row" flexWrap="wrap" rowGap="0.2rem" columnGap="0.5rem" marginBottom="1rem">
               {
-                props.devStacks.map(ds =>
+                devStacks.map(ds =>
                   <IconChip size="small" variant="outlined" key={ds} label={ds} icon={DevStacks[ds]} />)
               }
-              <IconChip size="small" variant="outlined" label={props.dateRange} icon={<MdDateRange />} />
-              <IconChip size="small" variant="outlined" label={props.devType} icon={<MdPerson />} />
+              <IconChip size="small" variant="outlined" label={dateRange} icon={<MdDateRange />} />
+              <IconChip size="small" variant="outlined" label={devType} icon={<MdPerson />} />
               {/* <IconChip size="small" variant="outlined" label="開発完了" icon={<MdDone />} /> */}
             </Stack>
             <Typography variant="body2" color="text.secondary">
-              {props.description.replaceAll('\n', '<br />')}
+              {description.replaceAll('\n', '<br />')}
             </Typography>
           </CardContent>
-          <CardActions>
-            <Link href={props.detailLink || `/app/${props.path}`}><Button size="small">詳細</Button></Link>
-            {
-              !props.downloadLink ? null :
-                <Link href={props.downloadLink}><Button size="small">ダウンロード</Button></Link>
-            }
-            {
-              !props.sourceCodeLink ? null :
-                <Link href={props.sourceCodeLink}><Button size="small">ソースコード</Button></Link>
-            }
-          </CardActions>
-        </Box>
+        </CardActionArea>
       </Card>
     </Grid>
   );

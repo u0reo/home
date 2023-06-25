@@ -108,7 +108,7 @@ export const AppBar: React.FC<AppBarProps> = (props) => {
           {drawer}
         </Drawer>
       </Box>
-      <Container component="main" sx={{ p: 3 }}>
+      <Container component="main" maxWidth="lg" sx={{ p: 3 }}>
         <Toolbar />
         <Typography variant="h4" align="center" mt={2} mb={3}>{props.title}</Typography>
         {props.children}
