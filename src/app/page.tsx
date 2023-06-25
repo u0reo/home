@@ -4,10 +4,9 @@ import React from 'react';
 import Link from 'next/link';
 import { Button, Grid, Typography } from '@mui/material';
 import { AiOutlineDoubleRight } from 'react-icons/ai';
-import { AppBar, ArticleCard, IconChip, TitleWithLink, Typo, useSWRArticle } from '~/views';
+import { AppBar, Apps, ArticleCard, IconChip, TitleWithLink, Typo, useSWRArticle } from '~/views';
 import { pagesPath } from '~/lib';
-import { Apps } from './apps/page';
-import { otherSkills } from './skills/page';
+import { otherSkills } from './skills/data';
 import { MdDateRange } from 'react-icons/md';
 
 export default function Home() {
