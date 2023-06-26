@@ -10,7 +10,7 @@ import {
   Typography,
 } from '@mui/material';
 
-const ZennCardContent = styled(CardContent)({
+export const ZennCardContent = styled(CardContent)({
   display: 'flex',
   flexDirection: 'column',
   minHeight: '8rem',

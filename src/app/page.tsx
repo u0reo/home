@@ -2,29 +2,46 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { Button, Grid, Typography } from '@mui/material';
+import { Button, Card, Grid, Skeleton, Typography } from '@mui/material';
 import { AiOutlineDoubleRight } from 'react-icons/ai';
-import { AppBar, Apps, ArticleCard, IconChip, TitleWithLink, Typo, useSWRArticle } from '~/views';
+import { AppBar, Apps, ArticleCard, IconChip, TitleWithLink, Typo, useSWRArticle, ZennCardContent } from '~/views';
 import { pagesPath } from '~/lib';
 import { otherSkills } from './skills/data';
 import { MdDateRange } from 'react-icons/md';
 
 export default function Home() {
-  const { data: articles, error } = useSWRArticle();
+  const { data: articles, error, isLoading } = useSWRArticle();
 
   return (
     <AppBar title="ようこそ、ureo.jpへ">
-      <TitleWithLink title={`Zenn記事 (${(articles?.articles ?? []).filter(a => a.article_type === 'tech').length}件)`} linkTitle="Zennのプロフィールページへ" link="https://zenn.dev/ureo" />
+      <TitleWithLink title={
+        isLoading ? 'Zenn記事 (読み込み中…)' :
+          `Zenn記事 (${
+            (articles?.articles ?? [])
+              .filter(a => a.article_type === 'tech').length
+          }件)`
+      } linkTitle="Zennのプロフィールページへ" link="https://zenn.dev/ureo" />
       <Grid container spacing={2}>
         {
-          (articles?.articles ?? []).filter(a => a.article_type === 'tech').slice(0, 6).map(a =>
-            <ArticleCard
-              key={a.id}
-              title={`${a.emoji} ${a.title}`}
-              url={`https://zenn.dev/ureo/articles/${a.slug}`}
-              date={new Date(a.published_at)}
-              letters_count={a.body_letters_count} />
-          )
+          isLoading ?
+            new Array(6).fill(0).map((_, i) => (
+              <Grid item key={i} xs={12} sm={6} lg={4}>
+                <Card>
+                  <ZennCardContent>
+                    <Skeleton variant="rounded" sx={{ flexGrow: '1' }} />
+                    <Skeleton variant="text" width={70} sx={{ fontSize: '0.875rem', alignSelf: 'end' }} />
+                  </ZennCardContent>
+                </Card>
+              </Grid>
+            )) :
+            (articles?.articles ?? []).filter(a => a.article_type === 'tech').slice(0, 6).map(a =>
+              <ArticleCard
+                key={a.id}
+                title={`${a.emoji} ${a.title}`}
+                url={`https://zenn.dev/ureo/articles/${a.slug}`}
+                date={new Date(a.published_at)}
+                letters_count={a.body_letters_count} />
+            )
         }
       </Grid>
       <TitleWithLink title="自作アプリ" linkTitle="一覧へ" link={pagesPath.apps.$url().pathname} />
