@@ -2,12 +2,26 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { Button, Card, Grid, Skeleton, Typography } from '@mui/material';
+import { Box, Button, Card, Grid, Skeleton, Typography } from '@mui/material';
 import { AiOutlineDoubleRight } from 'react-icons/ai';
 import { AppBar, Apps, ArticleCard, IconChip, TitleWithLink, Typo, useSWRArticle, ZennCardContent } from '~/views';
 import { pagesPath } from '~/lib';
 import { otherSkills } from './skills/data';
 import { MdDateRange } from 'react-icons/md';
+import GitHubCalendar from 'react-github-calendar';
+
+const labels = {
+  months: [
+    '1月', '2月', '3月', '4月', '5月', '6月',
+    '7月', '8月', '9月', '10月', '11月', '12月',
+  ],
+  weekdays: [ '日', '月', '火', '水', '木', '金', '土' ],
+  totalCount: '{{year}}年の活動数は{{count}}回',
+  legend: {
+    less: '少',
+    more: '多',
+  },
+} as const;
 
 export default function Home() {
   const { data: articles, error, isLoading } = useSWRArticle();
@@ -58,19 +72,19 @@ export default function Home() {
         }
         {(otherSkills.length > 10) ? ' など' : ''}
       </Typography>
-      <Typo variant="h4" align="center" mt="2rem">リンク集</Typo>
-      <Link href="https://github.com/u0reo">
-        <Button endIcon={<AiOutlineDoubleRight />} fullWidth sx={{ fontSize: '1.2rem' }}>GitHub</Button>
-      </Link>
-      <Link href="https://zenn.dev/ureo">
-        <Button endIcon={<AiOutlineDoubleRight />} fullWidth sx={{ fontSize: '1.2rem' }}>Zenn</Button>
-      </Link>
-      <Link href="https://twitter.com/u0reo">
-        <Button endIcon={<AiOutlineDoubleRight />} fullWidth sx={{ fontSize: '1.2rem' }}>Twitter</Button>
-      </Link>
-      <Link href="https://github.com/u0reo/home">
-        <Button endIcon={<AiOutlineDoubleRight />} fullWidth sx={{ fontSize: '1.2rem' }}>Homepage&apos;s Source Code</Button>
-      </Link>
+      <TitleWithLink title="GitHubの貢献数" linkTitle="リポジトリ一覧へ" link="https://github.com/u0reo" />
+      <Box overflow="auto">
+        <GitHubCalendar
+          username="u0reo"
+          labels={labels as any}
+          blockMargin={6}
+          blockSize={18}
+          fontSize={12}
+          style={{ minWidth: '800px' }} />
+      </Box>
+      <TitleWithLink title="Twitter" linkTitle="プロフィールページへ" link="https://twitter.com/u0reo" />
+      <TitleWithLink title="ホームページのソースコード" />
+      <object type="image/svg+xml" data="https://gh-card.dev/repos/u0reo/home.svg?link_target=_blank"></object>
     </AppBar>
   );
 }
