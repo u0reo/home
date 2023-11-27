@@ -1,13 +1,10 @@
 'use client';
 
 import React from 'react';
-import Link from 'next/link';
-import { Box, Button, Card, Grid, Skeleton, Typography } from '@mui/material';
-import { AiOutlineDoubleRight } from 'react-icons/ai';
-import { AppBar, Apps, ArticleCard, IconChip, TitleWithLink, Typo, useSWRArticle, ZennCardContent } from '~/views';
+import { Box, Card, Grid, Paper, Skeleton, Typography } from '@mui/material';
+import { AppBar, Apps, ArticleCard, IconChip, TitleWithLink, useSWRArticle, ZennCardContent } from '~/views';
 import { pagesPath } from '~/lib';
 import { otherSkills } from './skills/data';
-import { MdDateRange } from 'react-icons/md';
 import GitHubCalendar from 'react-github-calendar';
 
 const labels = {
@@ -61,30 +58,29 @@ export default function Home() {
       <TitleWithLink title="自作アプリ" linkTitle="一覧へ" link={pagesPath.apps.$url().pathname} />
       <Apps />
       <TitleWithLink title="経験言語/フレームワーク等" linkTitle="一覧へ" link={pagesPath.skills.$url().pathname} />
-      <Typography variant="body1">
         フレームワーク等: {
-          otherSkills.slice(0, 10).map(s => <IconChip
-            key={s.name}
-            size="small"
-            variant="outlined"
-            label={s.name}
-            icon={s.icon} />)
-        }
-        {(otherSkills.length > 10) ? ' など' : ''}
-      </Typography>
+        otherSkills.slice(0, 10).map(s => <IconChip
+          key={s.name}
+          size="small"
+          variant="outlined"
+          label={s.name}
+          icon={s.icon} />)
+      }
+      {(otherSkills.length > 10) ? ' など' : ''}
       <TitleWithLink title="GitHubの貢献数" linkTitle="リポジトリ一覧へ" link="https://github.com/u0reo" />
       <Box overflow="auto">
         <GitHubCalendar
           username="u0reo"
           labels={labels as any}
-          blockMargin={6}
-          blockSize={18}
-          fontSize={12}
-          style={{ minWidth: '800px' }} />
+          blockMargin={3}
+          blockSize={12}
+          fontSize={12} />
       </Box>
-      <TitleWithLink title="Twitter" linkTitle="プロフィールページへ" link="https://twitter.com/u0reo" />
+      <TitleWithLink title="X(Twitter)" linkTitle="プロフィールページへ" link="https://twitter.com/u0reo" />
       <TitleWithLink title="ホームページのソースコード" />
-      <object type="image/svg+xml" data="https://gh-card.dev/repos/u0reo/home.svg?link_target=_blank"></object>
+      <Paper variant="outlined" sx={{ height: 109, maxWidth: '100%', overflow: 'hidden' }}>
+        <object type="image/svg+xml" data="https://gh-card.dev/repos/u0reo/home.svg?link_target=_blank"></object>
+      </Paper>
     </AppBar>
   );
 }

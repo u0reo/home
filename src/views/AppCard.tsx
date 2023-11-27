@@ -8,7 +8,6 @@ import {
   CardContent,
   Grid,
   Stack,
-  styled,
   Typography,
 } from '@mui/material';
 import { FaJava } from 'react-icons/fa';
@@ -31,14 +30,6 @@ import {
   SiXamarin,
 } from 'react-icons/si';
 import { IconChip } from './IconChip';
-
-const CardImage = styled(Image)({
-  objectFit: 'cover', // 'contain',
-  objectPosition: '0 0',
-  position: 'relative',
-  height: '192px !important',
-  width: '192px !important',
-});
 
 const DevStacks = {
   Bootstrap3: <SiBootstrap />,
@@ -81,20 +72,32 @@ export const AppCard: React.FC<AppCardProps> = (props) => {
 
   return (
     <Grid item xs={12} lg={6}>
-      <Card>
+      <Card variant="outlined">
         <CardActionArea sx={{ display: 'flex', alignItems: 'flex-start' }} onClick={() => {
           const realLink = link || `/app/${path}`;
           realLink.includes('http') ? window.open(realLink) : router.push(realLink);
         }}>
-          <CardImage
-            src={imageUrl || `/img/${path}.${imageType ?? 'png'}`}
-            alt={title}
-            width={150}
-            height={150}
-          />
-          <CardContent>
-            <Typography variant="h5" component="div">{title}</Typography>
-            <Stack direction="row" flexWrap="wrap" rowGap="0.2rem" columnGap="0.5rem" marginBottom="1rem">
+          <Box sx={{
+            '@media screen and (max-width: 600px)': {
+              display: 'none',
+            },
+            objectFit: 'cover', // 'contain',
+            objectPosition: '0 0',
+            position: 'relative',
+            height: '200px !important',
+            width: '200px !important',
+          }}>
+            <Image
+              src={imageUrl ?? `/img/${path}.${imageType ?? 'png'}`}
+              alt={title}
+              sizes="(max-width: 600px) 0, 200px"
+              height={200}
+              width={200}
+            />
+          </Box>
+          <CardContent sx={{ marginRight: 'auto' }}>
+            <Typography variant="h5" component="div" gutterBottom>{title}</Typography>
+            <Stack direction="row" flexWrap="wrap" marginBottom="0.5rem">
               {
                 devStacks.map(ds =>
                   <IconChip size="small" variant="outlined" key={ds} label={ds} icon={DevStacks[ds]} />)

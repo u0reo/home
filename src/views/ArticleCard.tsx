@@ -1,5 +1,4 @@
 import React from 'react';
-import axios from 'axios';
 import useSWR from 'swr';
 import {
   Card,
@@ -52,7 +51,7 @@ type ZennArticlesRes = {
   next_page: unknown;
 };
 
-const fetcher = async (url: string) => (await axios(url)).data;
+const fetcher = async (url: string) => await (await fetch(url)).json();
 
 export const useSWRArticle = () => useSWR<ZennArticlesRes>('/api/zenn-articles', fetcher);
 
@@ -67,7 +66,7 @@ export const ArticleCard: React.FC<ArticleCardProps> = ({ title, url, date }) =>
   return (
     <Grid item xs={12} sm={6} lg={4}>
       <CardActionArea onClick={() => window.open(url)}>
-        <Card>
+        <Card variant="outlined">
           <ZennCardContent>
             <TwoLineTypo variant="h6">{title}</TwoLineTypo>
             <Typography variant="body2" color="text.secondary" align="right">

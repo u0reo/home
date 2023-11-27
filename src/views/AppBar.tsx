@@ -20,7 +20,7 @@ import {
 } from '@mui/material';
 import { RxHamburgerMenu } from 'react-icons/rx';
 
-const title = 'ureo.jp';
+const defaultTitle = 'ureo.jp';
 const drawerWidth = 240;
 const navItems = {
   Home: '/',
@@ -44,7 +44,7 @@ export const AppBar: React.FC<AppBarProps> = (props) => {
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
       <Typography variant="h6" sx={{ my: 2 }}>
-        {title}
+        {defaultTitle}
       </Typography>
       <Divider />
       <List>
@@ -78,7 +78,7 @@ export const AppBar: React.FC<AppBarProps> = (props) => {
             <RxHamburgerMenu />
           </IconButton>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            {title}
+            {defaultTitle}
           </Typography>
           <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
             {Object.keys(navItems).map((key) => (

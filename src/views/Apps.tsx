@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { Grid } from '@mui/material';
-import { AppBar, AppCard } from '~/views';
+import { AppCard } from '~/views';
 
 export const Apps: React.FC = () => (
   <Grid container spacing={2}>
@@ -56,5 +56,6 @@ export const Apps: React.FC = () => (
       dateRange="2023/1~4"
       devType="個人開発"
       description="NASでワイルドカード証明書を自動取得"
-      link="https://zenn.dev/ureo/articles/certbot-dns01" />
+      link="https://zenn.dev/ureo/articles/certbot-dns01"
+      imageUrl="" />
   </Grid>);

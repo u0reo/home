@@ -15,16 +15,17 @@ export const TitleWithLink: React.FC<TitleWithLinkProps> = ({ title, linkTitle, 
   return (
     <Grid container marginBottom="12px" sx={{
       '* + &': {
-        marginTop: '1rem',
+        marginTop: 5,
       },
     }}>
       <Grid item sm={6} xs={12}>
-        <Typography variant="h4">{title}</Typography>
+        <Typography variant="h5">{title}</Typography>
       </Grid>
       {
         linkTitle && link ?
           <Grid item sm={6} xs={12} sx={{ textAlign: 'right' }}>
             <Button
+              size="medium"
               endIcon={<AiOutlineDoubleRight />}
               onClick={() => link.includes('http') ? window.open(link) : router.push(link)}
               sx={{ marginTop: '0.5rem', textTransform: 'unset' }}>

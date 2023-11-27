@@ -1,10 +1,11 @@
-import axios from 'axios';
 import { NextResponse } from 'next/server';
 
-export async function GET() {
-  const result = await axios('https://zenn.dev/api/articles?username=ureo&order=latest');
+export const fetchCache = 'only-no-store';
 
-  return NextResponse.json(result.data, {
+export async function GET() {
+  const result = await fetch('https://zenn.dev/api/articles?username=ureo&order=latest');
+
+  return NextResponse.json(await result.json(), {
     status: result.status,
     statusText: result.statusText,
   });
